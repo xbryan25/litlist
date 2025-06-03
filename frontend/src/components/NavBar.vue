@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <nav class="bg-[#434343] shadow-[0px_4px_4px_rgba(0,0,0,0.375)]">
+  <nav class="bg-[#434343] shadow-[0px_6px_4px_rgba(0,0,0,0.375)]">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
