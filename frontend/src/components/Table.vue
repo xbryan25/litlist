@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, reactive } from 'vue'
+import axios from 'axios'
 import TableRow from './TableRow.vue'
 
 interface Book {
@@ -10,24 +12,23 @@ interface Book {
   readStatus: boolean
 }
 
-const books: Book[] = [
-  {
-    id: '1',
-    title: 'Harry Potter',
-    genre: 'Fantasy',
-    author: 'J.K. Rowling',
-    pages: 350,
-    readStatus: true,
-  },
-  {
-    id: '2',
-    title: 'Lord of the Rings',
-    genre: 'Adventure',
-    author: 'Tolkien',
-    pages: 670,
-    readStatus: true,
-  },
-]
+interface State {
+  books: Book[]
+}
+
+const state = reactive<State>({
+  books: [],
+})
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('/api/books')
+
+    state.books = response.data.books
+  } catch (error) {
+    console.error('Error fetching jobs', error)
+  }
+})
 </script>
 
 <template>
@@ -45,6 +46,10 @@ const books: Book[] = [
 
     <hr class="border-t border-[#868484]" />
 
-    <TableRow v-for="book in books.slice(0, books.length)" :key="book.id" :book="book" />
+    <TableRow
+      v-for="book in state.books.slice(0, state.books.length)"
+      :key="book.id"
+      :book="book"
+    />
   </div>
 </template>
