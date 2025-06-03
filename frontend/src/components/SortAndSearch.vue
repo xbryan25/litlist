@@ -11,7 +11,7 @@
         class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0"
       >
         <option value="Title">Title</option>
-        <option value="Genre">Genre</option>
+        <option value="Genre">Primary Genre</option>
         <option value="Author">Author</option>
         <option value="Pages">Pages</option>
         <option value="Read Status">Read Status</option>
@@ -33,8 +33,9 @@
       <select
         class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0"
       >
+        <option value="All">All</option>
         <option value="Title">Title</option>
-        <option value="Genre">Genre</option>
+        <option value="Genre">Primary Genre</option>
         <option value="Author">Author</option>
         <option value="Pages">Pages</option>
         <option value="Read Status">Read Status</option>
