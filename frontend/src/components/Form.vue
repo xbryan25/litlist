@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import { withDefaults, defineProps } from 'vue'
+
 const handleSubmit = () => {
   console.log('Submit')
 }
+
+interface Props {
+  formType?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  formType: 'add-book',
+})
 </script>
 
 <template>
@@ -10,7 +20,9 @@ const handleSubmit = () => {
       class="container m-auto max-w-2xl py-5 mt-15 bg-[#434343] rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)]"
     >
       <form @submit.prevent="handleSubmit">
-        <h2 class="text-center text-3xl text-[#D9D9D9] font-bold">Add Book</h2>
+        <h2 class="text-center text-3xl text-[#D9D9D9] font-bold">
+          {{ formType === 'add-book' ? 'Add Book' : 'Edit Book' }}
+        </h2>
 
         <div class="mx-10 mt-2">
           <label class="block text-[#D9D9D9] font-bold mb-2 text-xl"> Title </label>
@@ -83,7 +95,7 @@ const handleSubmit = () => {
             class="container w-full cursor-pointer text-center py-1 rounded-lg text-2xl font-bold bg-[#363636] text-[#F2EFEF] border border-[#868484]"
             type="submit"
           >
-            Add Book
+            {{ formType === 'add-book' ? 'Add Book' : 'Edit Book' }}
           </button>
         </div>
       </form>

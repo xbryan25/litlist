@@ -31,7 +31,9 @@ const books: Book[] = [
 </script>
 
 <template>
-  <div class="bg-[#434343] min-h-130 rounded-xl border border-[#868484]">
+  <div
+    class="bg-[#434343] min-h-130 rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)]"
+  >
     <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Title</div>
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Primary Genre</div>
