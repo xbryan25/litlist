@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="bg-[#434343] mx-40 mt-20 min-h-150 rounded-xl border border-[#868484]">
+  <div class="bg-[#434343] min-h-130 rounded-xl border border-[#868484]">
     <div class="grid grid-cols-6 mt-1 mb-1">
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Title</div>
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Genre</div>

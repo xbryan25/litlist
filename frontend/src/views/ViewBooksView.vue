@@ -5,6 +5,8 @@ import SortAndSearch from '@/components/SortAndSearch.vue'
 </script>
 
 <template>
-  <SortAndSearch />
-  <Table />
+  <div class="mx-40 mt-15">
+    <SortAndSearch />
+    <Table />
+  </div>
 </template>
