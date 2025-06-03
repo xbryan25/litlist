@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<Props>(), {
             type="text"
             id="title"
             name="title"
-            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9]"
+            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9] hover:bg-[#2e2e2e]"
             placeholder="Title"
             required
           />
@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<Props>(), {
             type="text"
             id="genre"
             name="genre"
-            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9]"
+            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9] hover:bg-[#2e2e2e]"
             placeholder="Genre"
             required
           />
@@ -54,7 +54,7 @@ const props = withDefaults(defineProps<Props>(), {
             type="text"
             id="author"
             name="author"
-            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9]"
+            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9] hover:bg-[#2e2e2e]"
             placeholder="Author"
             required
           />
@@ -68,7 +68,7 @@ const props = withDefaults(defineProps<Props>(), {
             max="9999999"
             id="number"
             name="number"
-            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+            class="border rounded w-full py-2 px-3 mb-2 text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none hover:bg-[#2e2e2e]"
             placeholder="Number of pages"
             required
           />
@@ -79,12 +79,24 @@ const props = withDefaults(defineProps<Props>(), {
 
           <div class="mb-2">
             <label class="inline-flex items-center mr-4 cursor-pointer">
-              <input type="radio" name="read-status" value="read" class="w-3 h-3 mr-2" required />
+              <input
+                type="radio"
+                name="read-status"
+                value="read"
+                class="w-3 h-3 mr-2 cursor-pointer"
+                required
+              />
               <span class="text-[#D9D9D9]">Finished</span>
             </label>
 
             <label class="inline-flex items-center cursor-pointer">
-              <input type="radio" name="read-status" value="unread" class="w-3 h-3 mr-2" required />
+              <input
+                type="radio"
+                name="read-status"
+                value="unread"
+                class="w-3 h-3 mr-2 cursor-pointer"
+                required
+              />
               <span class="text-[#D9D9D9]">Not finished</span>
             </label>
           </div>
@@ -92,7 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
 
         <div class="mx-10 mt-10">
           <button
-            class="container w-full cursor-pointer text-center py-1 rounded-lg text-2xl font-bold bg-[#363636] text-[#F2EFEF] border border-[#868484]"
+            class="container w-full cursor-pointer text-center py-1 rounded-lg text-2xl font-bold bg-[#363636] text-[#F2EFEF] border border-[#868484] hover:bg-[#2e2e2e]"
             type="submit"
           >
             {{ formType === 'add-book' ? 'Add Book' : 'Edit Book' }}
