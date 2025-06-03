@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <nav class="bg-[#434343] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+  <nav class="bg-[#434343] shadow-[0px_4px_4px_rgba(0,0,0,0.375)]">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
@@ -18,10 +18,10 @@ import { RouterLink } from 'vue-router'
                 class="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-1 font-bold text-xl"
                 >View Books</RouterLink
               >
-              <a
-                href="jobs.html"
+              <RouterLink
+                to="/add-book"
                 class="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-1 font-bold text-xl"
-                >Add Book</a
+                >Add Book</RouterLink
               >
               <div class="w-9 h-9 rounded-full bg-[#D9D9D9] mt-0.5 ml-1 cursor-pointer"></div>
             </div>
