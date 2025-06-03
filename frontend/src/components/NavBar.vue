@@ -18,10 +18,10 @@ import { RouterLink } from 'vue-router'
                 class="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-1 font-bold text-xl"
                 >View Books</RouterLink
               >
-              <a
-                href="jobs.html"
+              <RouterLink
+                to="/add-book"
                 class="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-1 font-bold text-xl"
-                >Add Book</a
+                >Add Book</RouterLink
               >
               <div class="w-9 h-9 rounded-full bg-[#D9D9D9] mt-0.5 ml-1 cursor-pointer"></div>
             </div>
