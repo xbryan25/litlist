@@ -30,13 +30,15 @@ const props = defineProps<Props>()
     </div>
     <div class="flex gap-1 mx-2">
       <div
-        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer"
+        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
       >
         <RouterLink to="/edit-book">
           <img src="@/assets/images/edit.svg" alt="Logo" class="w-[26px] h-auto" />
         </RouterLink>
       </div>
-      <div class="flex flex-1 rounded-lg border border-[#868484] justify-center cursor-pointer">
+      <div
+        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
+      >
         <img src="@/assets/images/delete.svg" alt="Logo" class="w-[26px] h-auto" />
       </div>
     </div>

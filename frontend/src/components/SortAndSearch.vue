@@ -8,7 +8,7 @@
       </div>
 
       <select
-        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0"
+        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="Title">Title</option>
         <option value="Genre">Primary Genre</option>
@@ -18,7 +18,7 @@
       </select>
 
       <select
-        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0"
+        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="Ascending">Ascending</option>
         <option value="Descending">Descending</option>
@@ -31,7 +31,7 @@
       </div>
 
       <select
-        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0"
+        class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="All">All</option>
         <option value="Title">Title</option>
@@ -44,7 +44,7 @@
       <input
         type="search"
         placeholder="Search..."
-        class="text-xl font-bold text-[#F2EFEF] rounded border border-gray-300 min-w-0 pl-1.5"
+        class="text-xl font-bold text-[#F2EFEF] rounded border border-gray-300 min-w-0 pl-1.5 hover:bg-[#2e2e2e]"
       />
     </div>
   </div>
