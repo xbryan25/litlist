@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-const test: string = "teset";
-
+import NavBar from './components/NavBar.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
-  <p class="text-red-500 text-9xl">Yo</p>
+  <NavBar />
+  <RouterView />
 </template>
-
