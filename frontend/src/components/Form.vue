@@ -49,7 +49,7 @@ const handleSubmit = async () => {
     if (props.formType === 'add-book') {
       const response = await axios.post(`/api/books/add-book`, newBook)
 
-      toast.success('Book edded successfully')
+      toast.success('Book added successfully')
     } else if (props.formType === 'edit-book') {
       const response = await axios.put(`/api/books/book/${bookId}`, newBook)
       toast.success('Book edited successfully')
@@ -59,10 +59,10 @@ const handleSubmit = async () => {
   } catch (error) {
     if (props.formType === 'add-book') {
       console.error('Error adding book', error)
-      toast.error('Book not added successfully')
+      toast.error('Book added unsuccessfully')
     } else if (props.formType === 'edit-book') {
       console.error('Error editing book', error)
-      toast.error('Book not edited successfully')
+      toast.error('Book edited unsuccessfully')
     }
   }
 }

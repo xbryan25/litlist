@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, ref, computed, type Ref } from 'vue'
+import { defineProps, defineEmits, ref, computed, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { useToast } from 'vue-toastification'
@@ -23,21 +23,18 @@ const props = defineProps<Props>()
 
 const toast = useToast()
 const router = useRouter()
+const emit = defineEmits(['deleted'])
 
 const deleteBook = async () => {
   try {
-    const confirm = window.confirm('Are you sure you want to delete this job?')
+    const confirm = window.confirm('Are you sure you want to delete this book?')
 
     if (confirm) {
-      // await axios.delete(`/api/jobs/${props.book.id}`)
-
-      console.log(`ID: ${props.book.id} Title: ${props.book.title}`)
-
-      // console.log(props.book)
+      await axios.delete(`/api/books/book/${props.book.id}`)
 
       toast.success('Book deleted successfully')
 
-      router.push('/')
+      emit('deleted', props.book.id)
     }
   } catch (error) {
     console.error('Error deleting book', error)
