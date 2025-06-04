@@ -32,7 +32,7 @@ const props = defineProps<Props>()
       <div
         class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
       >
-        <RouterLink to="/edit-book">
+        <RouterLink :to="`/edit-book/${props.book.id}`">
           <img src="@/assets/images/edit.svg" alt="Logo" class="w-[26px] h-auto" />
         </RouterLink>
       </div>

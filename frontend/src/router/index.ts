@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
     component: AddBookView,
   },
   {
-    path: '/edit-book',
+    path: '/edit-book/:id',
     name: 'edit-book',
     component: EditBookView,
   }

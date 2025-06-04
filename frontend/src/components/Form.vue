@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, reactive } from 'vue'
+import { withDefaults, defineProps, reactive, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
 interface Book {
-  id: string
+  id: string | string[]
   title: string
   genre: string
   author: string
@@ -17,16 +18,20 @@ interface Props {
 
 type BookForm = Omit<Book, 'id'>
 
+const route = useRoute()
+const router = useRouter()
+const bookId = route.params.id
+
+const props = withDefaults(defineProps<Props>(), {
+  formType: 'add-book',
+})
+
 const form = reactive<BookForm>({
   title: '',
   genre: '',
   author: '',
   pages: 0,
   read_status: false,
-})
-
-const props = withDefaults(defineProps<Props>(), {
-  formType: 'add-book',
 })
 
 const handleSubmit = async () => {
@@ -41,15 +46,40 @@ const handleSubmit = async () => {
   try {
     // if formType == 'add-book', use POST, else use PUT
 
-    const response = await axios.post(`/api/books/add-book`, newBook)
+    if (props.formType === 'add-book') {
+      const response = await axios.post(`/api/books/add-book`, newBook)
+    } else if (props.formType === 'edit-book') {
+      const response = await axios.put(`/api/books/book/${bookId}`, newBook)
+    }
 
-    console.log('Success!')
-
-    console.log(newBook)
+    router.push('/')
   } catch (error) {
-    console.error('Error getting book', error)
+    if (props.formType === 'add-book') {
+      console.error('Error adding book', error)
+    } else if (props.formType === 'edit-book') {
+      console.error('Error editing book', error)
+    }
   }
 }
+
+onMounted(async () => {
+  if (props.formType === 'edit-book') {
+    try {
+      const response = await axios.get(`/api/books/book/${bookId}`)
+
+      form.title = response.data.books.title
+      form.genre = response.data.books.genre
+      form.author = response.data.books.author
+      form.pages = response.data.books.pages
+      form.read_status = response.data.books.read_status == 1 ? true : false
+
+      // console.log(response.data.books.title)
+      console.log(form)
+    } catch (error) {
+      console.error('Error fetching book', error)
+    }
+  }
+})
 </script>
 
 <template>

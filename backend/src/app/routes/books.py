@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Blueprint, request, jsonify
-from app.controllers import fetch_all_books, add_book
+from app.controllers import fetch_all_books, fetch_book, add_book, edit_book
 from app.db.db import get_db
 from app.models import Book
 
@@ -19,6 +19,18 @@ def get_books_func():
                     "message": "Retrieved all books"}), 200
 
 
+@bp.route("/book/<book_id>", methods=['GET'])
+def get_book_func(book_id):
+    db = get_db()
+
+    book = fetch_book(db, book_id)
+
+    book_dict = book.__dict__
+
+    return jsonify({"books": book_dict,
+                    "message": "Retrieved a book"}), 200
+
+
 @bp.route("/add-book", methods=['POST'])
 def add_book_func():
     book_data = request.get_json()
@@ -31,7 +43,7 @@ def add_book_func():
         genre=book_data['genre'],
         author=book_data['author'],
         pages=book_data['pages'],
-        read_status=int(True if book_data['readStatus'] else False)
+        read_status=int(True if book_data['read_status'] else False)
     )
 
     db = get_db()
@@ -47,3 +59,27 @@ def add_book_func():
         return jsonify({"message": "Book not added successfully"}), 500
 
 
+@bp.route("/book/<book_id>", methods=['PUT'])
+def edit_book_func(book_id):
+    book_data = request.get_json()
+
+    existing_book = Book(
+        book_id=book_id,
+        title=book_data['title'],
+        genre=book_data['genre'],
+        author=book_data['author'],
+        pages=book_data['pages'],
+        read_status=int(True if book_data['read_status'] else False)
+    )
+
+    db = get_db()
+
+    try:
+        edit_book(db, existing_book)
+
+        return jsonify({"message": "Book added successfully"}), 201
+
+    except Exception as e:
+        print(e)
+
+        return jsonify({"message": "Book not added successfully"}), 500
