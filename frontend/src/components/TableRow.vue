@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { defineProps, ref, computed, type Ref } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { useToast } from 'vue-toastification'
 // import delete_icon from '@/assets/images/delete.svg'
 // import edit_icon from '@/assets/images/edit.svg'
 
@@ -17,11 +20,35 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+
+const toast = useToast()
+const router = useRouter()
+
+const deleteBook = async () => {
+  try {
+    const confirm = window.confirm('Are you sure you want to delete this job?')
+
+    if (confirm) {
+      // await axios.delete(`/api/jobs/${props.book.id}`)
+
+      console.log(`ID: ${props.book.id} Title: ${props.book.title}`)
+
+      // console.log(props.book)
+
+      toast.success('Book deleted successfully')
+
+      router.push('/')
+    }
+  } catch (error) {
+    console.error('Error deleting book', error)
+    toast.error('Book not deleted successfully')
+  }
+}
 </script>
 
 <template>
   <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
-    <div class="text-center text-white px-3 py-1 text-xl">{{ book.author }}</div>
+    <div class="text-center text-white px-3 py-1 text-xl">{{ book.title }}</div>
     <div class="text-center text-white px-3 py-1 text-xl">{{ book.genre }}</div>
     <div class="text-center text-white px-3 py-1 text-xl">{{ book.author }}</div>
     <div class="text-center text-white px-3 py-1 text-xl">{{ book.pages }}</div>
@@ -37,6 +64,7 @@ const props = defineProps<Props>()
         </RouterLink>
       </div>
       <div
+        @click="deleteBook"
         class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
       >
         <img src="@/assets/images/delete.svg" alt="Logo" class="w-[26px] h-auto" />
