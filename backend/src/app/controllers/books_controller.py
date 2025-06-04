@@ -56,3 +56,14 @@ def edit_book(db, book):
     cursor.execute(sql, values)
 
     db.commit()
+
+
+def delete_book(db, book_id):
+    cursor = db.cursor()
+
+    sql = 'DELETE FROM books WHERE id = ?'
+    values = (book_id,)
+
+    cursor.execute(sql, values)
+
+    db.commit()

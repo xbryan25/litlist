@@ -20,6 +20,10 @@ const state = reactive<State>({
   books: [],
 })
 
+const handleDelete = (id: string) => {
+  state.books = state.books.filter((book) => book.id !== id)
+}
+
 onMounted(async () => {
   try {
     const response = await axios.get('/api/books')
@@ -50,6 +54,7 @@ onMounted(async () => {
       v-for="book in state.books.slice(0, state.books.length)"
       :key="book.id"
       :book="book"
+      @deleted="handleDelete"
     />
   </div>
 </template>
