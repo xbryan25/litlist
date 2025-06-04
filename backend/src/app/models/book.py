@@ -1,24 +1,21 @@
 
 class Book:
-    def __init__(self, book, _id):
-        self._id = _id
+    def __init__(self, book_id, title, genre, author, pages, read_status):
+        self.id = book_id
 
-        self.title = book["title"]
-        self.genre = book["genre"]
-        self.author = book["author"]
-        self.pages = book["pages"]
-        self.read_status = book["read_status"]
+        self.title = title
+        self.genre = genre
+        self.author = author
+        self.pages = pages
+        self.read_status = read_status
 
-    def insert(self):
-        # insert to db
-        pass
-
-    def json(self):
-        return {
-            "id": self._id,
-            "title": self.title,
-            "genre": self.genre,
-            "author": self.author,
-            "pages": self.pages,
-            "readStatus": self.read_status
-        }
+    @classmethod
+    def from_row(cls, row):
+        return cls(
+            book_id=row['id'],
+            title=row['title'],
+            genre=row['genre'],
+            author=row['author'],
+            pages=row['pages'],
+            read_status=int(True if row['read_status'] else False)
+        )

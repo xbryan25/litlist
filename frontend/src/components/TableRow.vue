@@ -9,7 +9,7 @@ interface Book {
   genre: string
   author: string
   pages: number
-  readStatus: boolean
+  read_status: boolean
 }
 
 interface Props {
@@ -26,7 +26,7 @@ const props = defineProps<Props>()
     <div class="text-center text-white px-3 py-1 text-xl">{{ book.author }}</div>
     <div class="text-center text-white px-3 py-1 text-xl">{{ book.pages }}</div>
     <div class="text-center text-white px-3 py-1 text-xl">
-      {{ book.readStatus ? 'Finished' : 'Not finished' }}
+      {{ book.read_status ? 'Finished' : 'Not finished' }}
     </div>
     <div class="flex gap-1 mx-2">
       <div

@@ -1,23 +1,31 @@
 from flask import jsonify
+import sqlite3
+import uuid
+
+from app.models import Book
 
 
-def get_books_handler():
-    books = [
-        {
-            "id": '1',
-            "title": 'Harry Potter',
-            "genre": 'Fantasy',
-            "author": 'J.K. Rowling',
-            "pages": 350,
-            "readStatus": True
-        },
-        {
-            "id": '2',
-            "title": 'Lord of the Rings',
-            "genre": 'Adventure',
-            "author": 'Tolkien',
-            "pages": 670,
-            "readStatus": True
-        }
-    ]
-    return jsonify({"books": books})
+def fetch_all_books(db):
+    cursor = db.cursor()
+
+    sql = 'SELECT * FROM books'
+
+    cursor.execute(sql)
+
+    rows = cursor.fetchall()
+
+    return [Book.from_row(row) for row in rows]
+
+
+def add_book(db, book):
+
+    cursor = db.cursor()
+
+    sql = "INSERT INTO books (id, title, genre, author, pages, read_status) VALUES (?, ?, ?, ?, ?, ?)"
+
+    values = (book.id, book.title, book.genre, book.author, book.pages,
+              book.read_status)
+
+    cursor.execute(sql, values)
+
+    db.commit()

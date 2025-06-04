@@ -8,7 +8,7 @@ interface Book {
   genre: string
   author: string
   pages: number
-  readStatus: boolean
+  read_status: boolean
 }
 
 interface Props {
@@ -22,7 +22,7 @@ const form = reactive<BookForm>({
   genre: '',
   author: '',
   pages: 0,
-  readStatus: false,
+  read_status: false,
 })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -35,7 +35,7 @@ const handleSubmit = async () => {
     genre: form.genre,
     author: form.author,
     pages: form.pages,
-    readStatus: form.readStatus,
+    read_status: form.read_status,
   }
 
   try {
@@ -122,7 +122,7 @@ const handleSubmit = async () => {
           <div class="mb-2">
             <label class="inline-flex items-center mr-4 cursor-pointer">
               <input
-                v-model="form.readStatus"
+                v-model="form.read_status"
                 type="radio"
                 name="read-status"
                 :value="true"
@@ -134,7 +134,7 @@ const handleSubmit = async () => {
 
             <label class="inline-flex items-center cursor-pointer">
               <input
-                v-model="form.readStatus"
+                v-model="form.read_status"
                 type="radio"
                 name="read-status"
                 :value="false"

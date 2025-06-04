@@ -29,3 +29,4 @@ frontend/package-lock.json
 .idea/
 .venv/
 __pycache__
+backend/src/app/db/books.db
