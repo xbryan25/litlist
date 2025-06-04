@@ -1,1 +1,1 @@
-from app.controllers.books_controller import fetch_all_books, add_book
+from app.controllers.books_controller import fetch_all_books, fetch_book, add_book

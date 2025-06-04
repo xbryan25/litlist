@@ -9,7 +9,7 @@ interface Book {
   genre: string
   author: string
   pages: number
-  readStatus: boolean
+  read_status: boolean
 }
 
 interface State {

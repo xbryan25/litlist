@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { withDefaults, defineProps, reactive } from 'vue'
+import { withDefaults, defineProps, reactive, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 import axios from 'axios'
 
 interface Book {
@@ -17,16 +18,19 @@ interface Props {
 
 type BookForm = Omit<Book, 'id'>
 
+const route = useRoute()
+const bookId = route.params.id
+
+const props = withDefaults(defineProps<Props>(), {
+  formType: 'add-book',
+})
+
 const form = reactive<BookForm>({
   title: '',
   genre: '',
   author: '',
   pages: 0,
   read_status: false,
-})
-
-const props = withDefaults(defineProps<Props>(), {
-  formType: 'add-book',
 })
 
 const handleSubmit = async () => {
@@ -50,6 +54,25 @@ const handleSubmit = async () => {
     console.error('Error getting book', error)
   }
 }
+
+onMounted(async () => {
+  if (props.formType === 'edit-book') {
+    try {
+      const response = await axios.get(`/api/books/book/${bookId}`)
+
+      form.title = response.data.books.title
+      form.genre = response.data.books.genre
+      form.author = response.data.books.author
+      form.pages = response.data.books.pages
+      form.read_status = response.data.books.read_status == 1 ? true : false
+
+      // console.log(response.data.books.title)
+      console.log(form)
+    } catch (error) {
+      console.error('Error fetching book', error)
+    }
+  }
+})
 </script>
 
 <template>

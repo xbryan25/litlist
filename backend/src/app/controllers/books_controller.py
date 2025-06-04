@@ -17,6 +17,19 @@ def fetch_all_books(db):
     return [Book.from_row(row) for row in rows]
 
 
+def fetch_book(db, book_id):
+    cursor = db.cursor()
+
+    sql = 'SELECT * FROM books WHERE id = ?'
+    values = (book_id,)
+
+    cursor.execute(sql, values)
+
+    row = cursor.fetchone()
+
+    return Book.from_row(row)
+
+
 def add_book(db, book):
 
     cursor = db.cursor()

@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Blueprint, request, jsonify
-from app.controllers import fetch_all_books, add_book
+from app.controllers import fetch_all_books, fetch_book, add_book
 from app.db.db import get_db
 from app.models import Book
 
@@ -19,6 +19,18 @@ def get_books_func():
                     "message": "Retrieved all books"}), 200
 
 
+@bp.route("/book/<book_id>", methods=['GET'])
+def get_book_func(book_id):
+    db = get_db()
+
+    book = fetch_book(db, book_id)
+
+    book_dict = book.__dict__
+
+    return jsonify({"books": book_dict,
+                    "message": "Retrieved a book"}), 200
+
+
 @bp.route("/add-book", methods=['POST'])
 def add_book_func():
     book_data = request.get_json()
@@ -31,7 +43,7 @@ def add_book_func():
         genre=book_data['genre'],
         author=book_data['author'],
         pages=book_data['pages'],
-        read_status=int(True if book_data['readStatus'] else False)
+        read_status=int(True if book_data['read_status'] else False)
     )
 
     db = get_db()
