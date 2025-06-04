@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Blueprint, request, jsonify
-from app.controllers import fetch_all_books, fetch_book, add_book
+from app.controllers import fetch_all_books, fetch_book, add_book, edit_book
 from app.db.db import get_db
 from app.models import Book
 
@@ -59,3 +59,27 @@ def add_book_func():
         return jsonify({"message": "Book not added successfully"}), 500
 
 
+@bp.route("/book/<book_id>", methods=['PUT'])
+def edit_book_func(book_id):
+    book_data = request.get_json()
+
+    existing_book = Book(
+        book_id=book_id,
+        title=book_data['title'],
+        genre=book_data['genre'],
+        author=book_data['author'],
+        pages=book_data['pages'],
+        read_status=int(True if book_data['read_status'] else False)
+    )
+
+    db = get_db()
+
+    try:
+        edit_book(db, existing_book)
+
+        return jsonify({"message": "Book added successfully"}), 201
+
+    except Exception as e:
+        print(e)
+
+        return jsonify({"message": "Book not added successfully"}), 500

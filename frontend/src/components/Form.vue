@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 
 interface Book {
-  id: string
+  id: string | string[]
   title: string
   genre: string
   author: string
@@ -45,13 +45,21 @@ const handleSubmit = async () => {
   try {
     // if formType == 'add-book', use POST, else use PUT
 
-    const response = await axios.post(`/api/books/add-book`, newBook)
+    if (props.formType === 'add-book') {
+      const response = await axios.post(`/api/books/add-book`, newBook)
+    } else if (props.formType === 'edit-book') {
+      const response = await axios.put(`/api/books/book/${bookId}`, newBook)
+    }
 
     console.log('Success!')
 
     console.log(newBook)
   } catch (error) {
-    console.error('Error getting book', error)
+    if (props.formType === 'add-book') {
+      console.error('Error adding book', error)
+    } else if (props.formType === 'edit-book') {
+      console.error('Error editing book', error)
+    }
   }
 }
 

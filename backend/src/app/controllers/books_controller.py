@@ -42,3 +42,17 @@ def add_book(db, book):
     cursor.execute(sql, values)
 
     db.commit()
+
+
+def edit_book(db, book):
+
+    cursor = db.cursor()
+
+    sql = "UPDATE books SET title = ?, genre = ?, author = ?, pages = ?, read_status = ? WHERE id = ?"
+
+    values = (book.title, book.genre, book.author, book.pages,
+              book.read_status, book.id)
+
+    cursor.execute(sql, values)
+
+    db.commit()
