@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, reactive, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
 interface Book {
@@ -19,6 +19,7 @@ interface Props {
 type BookForm = Omit<Book, 'id'>
 
 const route = useRoute()
+const router = useRouter()
 const bookId = route.params.id
 
 const props = withDefaults(defineProps<Props>(), {
@@ -51,9 +52,7 @@ const handleSubmit = async () => {
       const response = await axios.put(`/api/books/book/${bookId}`, newBook)
     }
 
-    console.log('Success!')
-
-    console.log(newBook)
+    router.push('/')
   } catch (error) {
     if (props.formType === 'add-book') {
       console.error('Error adding book', error)
