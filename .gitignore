@@ -28,3 +28,4 @@ frontend/package-lock.json
 # ----------------- Backend --------------
 .idea/
 .venv/
+__pycache__
