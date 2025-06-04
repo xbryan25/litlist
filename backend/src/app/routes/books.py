@@ -1,7 +1,7 @@
 import uuid
 
 from flask import Blueprint, request, jsonify
-from app.controllers import fetch_all_books, fetch_book, add_book, edit_book
+from app.controllers import fetch_all_books, fetch_book, add_book, edit_book, delete_book
 from app.db.db import get_db
 from app.models import Book
 
@@ -83,3 +83,19 @@ def edit_book_func(book_id):
         print(e)
 
         return jsonify({"message": "Book not added successfully"}), 500
+
+
+@bp.route("/book/<book_id>", methods=['DELETE'])
+def delete_book_func(book_id):
+    db = get_db()
+
+    try:
+        delete_book(db, book_id)
+
+        return jsonify({"message": "Book deleted successfully"}), 200
+
+    except Exception as e:
+        print(e)
+
+        return jsonify({"message": "Book deleted unsuccessfully"}), 500
+
