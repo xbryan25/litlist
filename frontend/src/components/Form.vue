@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { withDefaults, defineProps, reactive, onMounted } from 'vue'
+import { useToast } from 'vue-toastification'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -20,6 +21,7 @@ type BookForm = Omit<Book, 'id'>
 
 const route = useRoute()
 const router = useRouter()
+const toast = useToast()
 const bookId = route.params.id
 
 const props = withDefaults(defineProps<Props>(), {
@@ -44,20 +46,23 @@ const handleSubmit = async () => {
   }
 
   try {
-    // if formType == 'add-book', use POST, else use PUT
-
     if (props.formType === 'add-book') {
       const response = await axios.post(`/api/books/add-book`, newBook)
+
+      toast.success('Book edded successfully')
     } else if (props.formType === 'edit-book') {
       const response = await axios.put(`/api/books/book/${bookId}`, newBook)
+      toast.success('Book edited successfully')
     }
 
     router.push('/')
   } catch (error) {
     if (props.formType === 'add-book') {
       console.error('Error adding book', error)
+      toast.error('Book not added successfully')
     } else if (props.formType === 'edit-book') {
       console.error('Error editing book', error)
+      toast.error('Book not edited successfully')
     }
   }
 }
