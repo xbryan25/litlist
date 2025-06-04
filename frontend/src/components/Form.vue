@@ -1,17 +1,55 @@
 <script setup lang="ts">
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults, defineProps, reactive } from 'vue'
+import axios from 'axios'
 
-const handleSubmit = () => {
-  console.log('Submit')
+interface Book {
+  id: string
+  title: string
+  genre: string
+  author: string
+  pages: number
+  read_status: boolean
 }
 
 interface Props {
   formType?: string
 }
 
+type BookForm = Omit<Book, 'id'>
+
+const form = reactive<BookForm>({
+  title: '',
+  genre: '',
+  author: '',
+  pages: 0,
+  read_status: false,
+})
+
 const props = withDefaults(defineProps<Props>(), {
   formType: 'add-book',
 })
+
+const handleSubmit = async () => {
+  const newBook: BookForm = {
+    title: form.title,
+    genre: form.genre,
+    author: form.author,
+    pages: form.pages,
+    read_status: form.read_status,
+  }
+
+  try {
+    // if formType == 'add-book', use POST, else use PUT
+
+    const response = await axios.post(`/api/books/add-book`, newBook)
+
+    console.log('Success!')
+
+    console.log(newBook)
+  } catch (error) {
+    console.error('Error getting book', error)
+  }
+}
 </script>
 
 <template>
@@ -27,6 +65,7 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="mx-10 mt-2">
           <label class="block text-[#D9D9D9] font-bold mb-2 text-xl"> Title </label>
           <input
+            v-model="form.title"
             type="text"
             id="title"
             name="title"
@@ -39,6 +78,7 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="mx-10 mt-2">
           <label class="block text-[#D9D9D9] font-bold mb-2 text-xl"> Genre </label>
           <input
+            v-model="form.genre"
             type="text"
             id="genre"
             name="genre"
@@ -51,6 +91,7 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="mx-10 mt-2">
           <label class="block text-[#D9D9D9] font-bold mb-2 text-xl"> Author </label>
           <input
+            v-model="form.author"
             type="text"
             id="author"
             name="author"
@@ -63,6 +104,7 @@ const props = withDefaults(defineProps<Props>(), {
         <div class="mx-10 mt-2">
           <label class="block text-[#D9D9D9] font-bold mb-2 text-xl"> Pages </label>
           <input
+            v-model="form.pages"
             type="number"
             min="1"
             max="9999999"
@@ -80,9 +122,10 @@ const props = withDefaults(defineProps<Props>(), {
           <div class="mb-2">
             <label class="inline-flex items-center mr-4 cursor-pointer">
               <input
+                v-model="form.read_status"
                 type="radio"
                 name="read-status"
-                value="read"
+                :value="true"
                 class="w-3 h-3 mr-2 cursor-pointer"
                 required
               />
@@ -91,9 +134,10 @@ const props = withDefaults(defineProps<Props>(), {
 
             <label class="inline-flex items-center cursor-pointer">
               <input
+                v-model="form.read_status"
                 type="radio"
                 name="read-status"
-                value="unread"
+                :value="false"
                 class="w-3 h-3 mr-2 cursor-pointer"
                 required
               />
