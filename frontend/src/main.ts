@@ -13,3 +13,7 @@ app.use(router)
 app.use(Toast)
 
 app.mount('#app')
+
+router.afterEach((to) => {
+    document.title = (to.meta.title as string) || 'LitList';
+});

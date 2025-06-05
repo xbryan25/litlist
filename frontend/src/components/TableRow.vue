@@ -45,11 +45,19 @@ const deleteBook = async () => {
 
 <template>
   <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
-    <div class="text-center text-white px-3 py-1 text-xl">{{ book.title }}</div>
-    <div class="text-center text-white px-3 py-1 text-xl">{{ book.genre }}</div>
-    <div class="text-center text-white px-3 py-1 text-xl">{{ book.author }}</div>
-    <div class="text-center text-white px-3 py-1 text-xl">{{ book.pages }}</div>
-    <div class="text-center text-white px-3 py-1 text-xl">
+    <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
+      {{ book.title }}
+    </div>
+    <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
+      {{ book.genre }}
+    </div>
+    <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
+      {{ book.author }}
+    </div>
+    <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
+      {{ book.pages }}
+    </div>
+    <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
       {{ book.read_status ? 'Finished' : 'Not finished' }}
     </div>
     <div class="flex gap-1 mx-2">
