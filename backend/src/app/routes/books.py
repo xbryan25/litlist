@@ -10,6 +10,11 @@ bp = Blueprint('books', __name__)
 
 @bp.route("", methods=['GET'])
 def get_books_func():
+    sort_type = request.args.get('sort_type', 'Title')
+    sort_by = request.args.get('sort_by', 'Ascending')
+
+    print(f"{sort_type} {sort_by}")
+
     db = get_db()
     books = fetch_all_books(db)
 
