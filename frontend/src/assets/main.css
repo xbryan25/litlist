@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: 'Urbanist';
-  src: url('@/assets/fonts/Urbanist.ttf') format('truetype');
+  src: url('/fonts/Urbanist.ttf') format('truetype');
 
   font-weight: 100 900;
   font-style: normal;

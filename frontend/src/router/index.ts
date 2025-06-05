@@ -8,16 +8,19 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'home',
     component: ViewBooksView,
+    meta: {title: 'Litlist | View Books'}
   },
   {
     path: '/add-book',
     name: 'add-book',
     component: AddBookView,
+    meta: {title: 'Litlist | Add Book'}
   },
   {
     path: '/edit-book/:id',
     name: 'edit-book',
     component: EditBookView,
+    meta: {title: 'Litlist | EditBook'}
   }
 ]
 

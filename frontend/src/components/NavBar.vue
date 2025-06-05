@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import bookImage from '@/assets/images/book.png'
+import lightModeImage from '@/assets/images/light-mode.png'
+import darkModeImage from '@/assets/images/dark-mode.png'
 </script>
 
 <template>
@@ -8,7 +11,7 @@ import { RouterLink } from 'vue-router'
       <div class="flex h-20 items-center justify-between">
         <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
           <RouterLink class="flex flex-shrink-0 items-center mr-4 cursor-pointer" to="/">
-            <div class="w-13 h-13 rounded-full bg-[#D9D9D9] mr-3"></div>
+            <div class="w-13 h-13 mr-1"><img :src="bookImage" /></div>
             <span class="font-primary font-bold hidden md:block text-[#F2EFEF] text-4xl ml-2"
               >LitList</span
             >
@@ -25,7 +28,9 @@ import { RouterLink } from 'vue-router'
                 class="font-primary text-[#F2EFEF] hover:bg-[#2e2e2e] hover:text-white rounded-md px-3 py-1 font-bold text-2xl"
                 >Add Book</RouterLink
               >
-              <div class="w-9 h-9 rounded-full bg-[#D9D9D9] mt-0.5 ml-1 cursor-pointer"></div>
+              <div class="w-9 h-9 mt-0.5 ml-1 cursor-pointer" title="Change to light mode?">
+                <img :src="lightModeImage" />
+              </div>
             </div>
           </div>
         </div>
