@@ -12,6 +12,10 @@ bp = Blueprint('books', __name__)
 def get_books_func():
     sort_type = request.args.get('sort_type', 'Title')
     sort_by = request.args.get('sort_by', 'Ascending')
+    search_type = request.args.get('search_type', 'All')
+    search_input = request.args.get('search_input', '')
+
+    print(f"{sort_type} {sort_by} {search_type} {search_input}")
 
     if sort_type not in ['Title', 'Genre', 'Author', 'Pages', 'Read Status']:
         return jsonify({"message": "Invalid sort type option"}), 400
