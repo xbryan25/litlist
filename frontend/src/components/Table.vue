@@ -15,6 +15,8 @@ interface Book {
 interface Props {
   sortType?: string
   sortBy?: string
+  searchType?: string
+  searchInput?: string
 }
 
 interface State {
@@ -35,11 +37,14 @@ const handleDelete = (id: string) => {
 }
 
 const fetchData = async () => {
-  console.log('fetccccccccccch')
-
   try {
     const response = await axios.get('/api/books', {
-      params: { sort_type: props.sortType, sort_by: props.sortBy },
+      params: {
+        sort_type: props.sortType,
+        sort_by: props.sortBy,
+        search_type: props.searchType,
+        search_input: props.searchInput,
+      },
     })
 
     state.books = response.data.books
@@ -49,7 +54,7 @@ const fetchData = async () => {
 }
 
 watch(
-  [() => props.sortType, () => props.sortBy],
+  [() => props.sortType, () => props.sortBy, () => props.searchType, () => props.searchInput],
   () => {
     fetchData()
   },

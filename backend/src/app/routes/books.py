@@ -10,18 +10,23 @@ bp = Blueprint('books', __name__)
 
 @bp.route("", methods=['GET'])
 def get_books_func():
-    sort_type = request.args.get('sort_type', 'Title')
+    sort_type = request.args.get('sort_type', 'Title').lower().replace(' ', '_')
     sort_by = request.args.get('sort_by', 'Ascending')
+    search_type = request.args.get('search_type', 'All').lower().replace(' ', '_')
+    search_input = request.args.get('search_input', '').strip()
 
-    if sort_type not in ['Title', 'Genre', 'Author', 'Pages', 'Read Status']:
+    if sort_type not in ['title', 'genre', 'author', 'pages', 'read_status']:
         return jsonify({"message": "Invalid sort type option"}), 400
 
     if sort_by not in ['Ascending', 'Descending']:
         return jsonify({"message": "Invalid sort by option"}), 400
 
+    if search_type not in ['all', 'title', 'genre', 'author', 'pages', 'read_status']:
+        return jsonify({"message": "Invalid search type option"}), 400
+
     try:
         db = get_db()
-        books = fetch_all_books(db=db, sort_type=sort_type, sort_by=sort_by)
+        books = fetch_all_books(db=db, sort_type=sort_type, sort_by=sort_by, search_type=search_type, search_input=search_input)
 
         books_dict = [book.__dict__ for book in books]
 

@@ -1,20 +1,46 @@
 <script setup lang="ts">
-import { defineEmits, ref, type Ref } from 'vue'
+import { defineEmits, ref, type Ref, watch } from 'vue'
+import debounce from 'lodash.debounce'
 
-const sortEmit = defineEmits<{
-  (e: 'sort', payload: { sortType: string; sortBy: string }): void
+const emit = defineEmits<{
+  (
+    e: 'sort',
+    payload: { sortType: string; sortBy: string; searchType: string; searchInput: string },
+  ): void
+  (
+    e: 'search',
+    payload: { sortType: string; sortBy: string; searchType: string; searchInput: string },
+  ): void
 }>()
 
 const selectedSortType: Ref<string> = ref('Title')
 const selectedSortBy: Ref<string> = ref('Ascending')
 
-const handleChange = () => {
+const selectedSearchType: Ref<string> = ref('All')
+const searchInput: Ref<string> = ref('')
+
+const handleSortChange = () => {
   // console.log(`Selected: ${selectedSortType.value} ${selectedSortBy.value}`)
-  sortEmit('sort', {
+  emit('sort', {
     sortType: selectedSortType.value,
     sortBy: selectedSortBy.value,
+    searchType: selectedSearchType.value,
+    searchInput: searchInput.value,
   })
 }
+
+const handleSearchChange = debounce(() => {
+  emit('search', {
+    sortType: selectedSortType.value,
+    sortBy: selectedSortBy.value,
+    searchType: selectedSearchType.value,
+    searchInput: searchInput.value,
+  })
+}, 400)
+
+watch(searchInput, () => {
+  handleSearchChange()
+})
 </script>
 
 <template>
@@ -26,7 +52,7 @@ const handleChange = () => {
 
       <select
         v-model="selectedSortType"
-        @change="handleChange"
+        @change="handleSortChange"
         class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="Title">Title</option>
@@ -38,7 +64,7 @@ const handleChange = () => {
 
       <select
         v-model="selectedSortBy"
-        @change="handleChange"
+        @change="handleSortChange"
         class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="Ascending">Ascending</option>
@@ -52,17 +78,20 @@ const handleChange = () => {
       </div>
 
       <select
+        v-model="selectedSearchType"
         class="text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
       >
         <option value="All">All</option>
         <option value="Title">Title</option>
-        <option value="Genre">Primary Genre</option>
+        <option value="Genre">Genre</option>
         <option value="Author">Author</option>
         <option value="Pages">Pages</option>
         <option value="Read Status">Read Status</option>
       </select>
 
       <input
+        v-model="searchInput"
+        @change="handleSearchChange"
         type="search"
         placeholder="Search..."
         class="text-xl font-bold text-[#F2EFEF] rounded border border-gray-300 min-w-0 pl-1.5 hover:bg-[#2e2e2e]"

@@ -5,18 +5,33 @@ import uuid
 from app.models import Book
 
 
-def fetch_all_books(db, sort_type, sort_by):
+def fetch_all_books(db, sort_type, sort_by, search_type, search_input):
     cursor = db.cursor()
 
     sort_by_dict = {"Ascending": "ASC", "Descending": "DESC"}
 
+    if search_type != "all":
+
+        sql = f"SELECT * FROM books WHERE {search_type} LIKE ?"
+
+        values = (f"%{search_input}%", )
+    else:
+        sql = f"""SELECT * FROM books 
+                    WHERE title LIKE ? OR 
+                    genre LIKE ? OR
+                    author LIKE ? OR
+                    pages LIKE ? OR
+                    read_status LIKE ?"""
+
+        values = (f"%{search_input}%", f"%{search_input}%", f"%{search_input}%", f"%{search_input}%", f"%{search_input}%")
+
     if sort_type == 'Read Status':
-        sql = f"""SELECT * FROM books ORDER BY {sort_type.lower().replace(' ', '_')} 
+        sql += f""" ORDER BY {sort_type} 
                     {sort_by_dict['Descending' if sort_by == 'Ascending' else 'Ascending']}"""
     else:
-        sql = f'SELECT * FROM books ORDER BY {sort_type.lower().replace(' ', '_')} {sort_by_dict[sort_by]}'
+        sql += f""" ORDER BY {sort_type} {sort_by_dict[sort_by]}"""
 
-    cursor.execute(sql)
+    cursor.execute(sql, values)
 
     rows = cursor.fetchall()
 
