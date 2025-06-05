@@ -4,8 +4,8 @@ import Table from '@/components/Table.vue'
 import SortAndSearch from '@/components/SortAndSearch.vue'
 // import NavBar from '@/components/NavBar.vue'
 
-const selectedSortType: Ref<string> = ref('')
-const selectedSortBy: Ref<string> = ref('')
+const selectedSortType: Ref<string> = ref('Title')
+const selectedSortBy: Ref<string> = ref('Ascending')
 
 const handleDelete = (params: { sortType: string; sortBy: string }) => {
   // console.log('')

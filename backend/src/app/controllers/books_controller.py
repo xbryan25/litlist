@@ -5,10 +5,16 @@ import uuid
 from app.models import Book
 
 
-def fetch_all_books(db):
+def fetch_all_books(db, sort_type, sort_by):
     cursor = db.cursor()
 
-    sql = 'SELECT * FROM books'
+    sort_by_dict = {"Ascending": "ASC", "Descending": "DESC"}
+
+    if sort_type == 'Read Status':
+        sql = f"""SELECT * FROM books ORDER BY {sort_type.lower().replace(' ', '_')} 
+                    {sort_by_dict['Descending' if sort_by == 'Ascending' else 'Ascending']}"""
+    else:
+        sql = f'SELECT * FROM books ORDER BY {sort_type.lower().replace(' ', '_')} {sort_by_dict[sort_by]}'
 
     cursor.execute(sql)
 
