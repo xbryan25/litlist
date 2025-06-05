@@ -10,25 +10,46 @@ bp = Blueprint('books', __name__)
 
 @bp.route("", methods=['GET'])
 def get_books_func():
-    db = get_db()
-    books = fetch_all_books(db)
+    sort_type = request.args.get('sort_type', 'Title')
+    sort_by = request.args.get('sort_by', 'Ascending')
 
-    books_dict = [book.__dict__ for book in books]
+    if sort_type not in ['Title', 'Genre', 'Author', 'Pages', 'Read Status']:
+        return jsonify({"message": "Invalid sort type option"}), 400
 
-    return jsonify({"books": books_dict,
-                    "message": "Retrieved all books"}), 200
+    if sort_by not in ['Ascending', 'Descending']:
+        return jsonify({"message": "Invalid sort by option"}), 400
+
+    try:
+        db = get_db()
+        books = fetch_all_books(db=db, sort_type=sort_type, sort_by=sort_by)
+
+        books_dict = [book.__dict__ for book in books]
+
+        return jsonify({"books": books_dict,
+                        "message": "Retrieved all books"}), 200
+
+    except Exception as e:
+        print(e)
+
+        return jsonify({"message": "Failed to retrieve all books"}), 500
 
 
 @bp.route("/book/<book_id>", methods=['GET'])
 def get_book_func(book_id):
-    db = get_db()
+    try:
+        db = get_db()
 
-    book = fetch_book(db, book_id)
+        book = fetch_book(db, book_id)
 
-    book_dict = book.__dict__
+        book_dict = book.__dict__
 
-    return jsonify({"books": book_dict,
-                    "message": "Retrieved a book"}), 200
+        return jsonify({"books": book_dict,
+                        "message": "Retrieved a book"}), 200
+
+    except Exception as e:
+        print(e)
+
+        return jsonify({"message": "Failed to retrieve book"}), 500
 
 
 @bp.route("/add-book", methods=['POST'])

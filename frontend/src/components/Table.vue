@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, defineProps, watch } from 'vue'
 import axios from 'axios'
 import TableRow from './TableRow.vue'
 
@@ -12,9 +12,19 @@ interface Book {
   read_status: boolean
 }
 
+interface Props {
+  sortType?: string
+  sortBy?: string
+}
+
 interface State {
   books: Book[]
 }
+
+const props = withDefaults(defineProps<Props>(), {
+  sortType: 'Title',
+  sortBy: 'Ascending',
+})
 
 const state = reactive<State>({
   books: [],
@@ -24,15 +34,27 @@ const handleDelete = (id: string) => {
   state.books = state.books.filter((book) => book.id !== id)
 }
 
-onMounted(async () => {
+const fetchData = async () => {
+  console.log('fetccccccccccch')
+
   try {
-    const response = await axios.get('/api/books')
+    const response = await axios.get('/api/books', {
+      params: { sort_type: props.sortType, sort_by: props.sortBy },
+    })
 
     state.books = response.data.books
   } catch (error) {
     console.error('Error fetching jobs', error)
   }
-})
+}
+
+watch(
+  [() => props.sortType, () => props.sortBy],
+  () => {
+    fetchData()
+  },
+  { immediate: true }, // Replaces onMounted
+)
 </script>
 
 <template>
@@ -41,7 +63,7 @@ onMounted(async () => {
   >
     <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Title</div>
-      <div class="text-center text-white px-3 py-1 font-bold text-xl">Primary Genre</div>
+      <div class="text-center text-white px-3 py-1 font-bold text-xl">Genre</div>
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Author</div>
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Pages</div>
       <div class="text-center text-white px-3 py-1 font-bold text-xl">Read Status</div>
