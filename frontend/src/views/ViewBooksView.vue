@@ -26,7 +26,7 @@ const updateValues = (params: {
 </script>
 
 <template>
-  <div class="mx-40 mt-15">
+  <div class="flex flex-col h-[calc(100vh-80px)] mx-40 pt-10">
     <SortAndSearch @sort="updateValues" @search="updateValues" />
     <Table
       :sortType="selectedSortType"

@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex h-8 mt-7 mb-10 justify-center items-center">
+  <div class="flex h-8 mt-5 mb-5 justify-center items-center">
     <div class="flex h-8 gap-2 max-w-full">
       <button
         class="bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e] inline-flex items-center justify-center"

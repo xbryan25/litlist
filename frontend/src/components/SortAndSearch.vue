@@ -44,7 +44,7 @@ watch(searchInput, () => {
 </script>
 
 <template>
-  <div class="flex max-h-10 h-10 my-5 gap-60">
+  <div class="flex min-h-10 h-10 my-5 gap-60">
     <div class="flex-1 grid grid-cols-[95px_1fr_1fr] gap-4 min-w-0">
       <div class="flex items-center justify-center min-w-0">
         <p class="font-primary flex-1 text-xl font-bold text-[#F2EFEF] text-left min-w-0">
