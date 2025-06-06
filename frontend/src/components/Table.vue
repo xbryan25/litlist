@@ -64,7 +64,7 @@ watch(
 
 <template>
   <div
-    class="bg-[#434343] min-h-[70vh] rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)] mb-10"
+    class="bg-[#434343] min-h-[70vh] rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)]"
   >
     <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
       <div class="font-primary text-center text-white px-3 py-1 font-bold text-xl">Title</div>

@@ -2,6 +2,7 @@
 import { ref, type Ref } from 'vue'
 import Table from '@/components/Table.vue'
 import SortAndSearch from '@/components/SortAndSearch.vue'
+import PageControls from '@/components/PageControls.vue'
 import { getEffectiveTypeParameterDeclarations } from 'typescript'
 // import NavBar from '@/components/NavBar.vue'
 
@@ -33,5 +34,6 @@ const updateValues = (params: {
       :searchType="selectedSearchType"
       :searchInput="searchInput"
     />
+    <PageControls />
   </div>
 </template>
