@@ -60,7 +60,6 @@ async function updateVisibleRows(): Promise<void> {
     const tableTop = tableRef.value.getBoundingClientRect().top
     const viewportHeight = window.innerHeight
 
-    // rowHeight + 1 -> header and line
     const excess = rowHeight + 1 + rowHeight
     const availableHeight = viewportHeight - tableTop - excess
 

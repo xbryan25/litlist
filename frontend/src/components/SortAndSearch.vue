@@ -20,7 +20,6 @@ const selectedSearchType: Ref<string> = ref('All')
 const searchInput: Ref<string> = ref('')
 
 const handleSortChange = () => {
-  // console.log(`Selected: ${selectedSortType.value} ${selectedSortBy.value}`)
   emit('sort', {
     sortType: selectedSortType.value,
     sortBy: selectedSortBy.value,
