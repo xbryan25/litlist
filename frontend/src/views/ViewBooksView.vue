@@ -2,6 +2,7 @@
 import { ref, type Ref } from 'vue'
 import Table from '@/components/Table.vue'
 import SortAndSearch from '@/components/SortAndSearch.vue'
+import PageControls from '@/components/PageControls.vue'
 import { getEffectiveTypeParameterDeclarations } from 'typescript'
 // import NavBar from '@/components/NavBar.vue'
 
@@ -10,6 +11,9 @@ const selectedSortBy: Ref<string> = ref('Ascending')
 
 const selectedSearchType: Ref<string> = ref('All')
 const searchInput: Ref<string> = ref('')
+
+const currentTotalPages: Ref<number> = ref(1)
+const currentPageNumber: Ref<number | null> = ref(1)
 
 const updateValues = (params: {
   sortType: string
@@ -22,16 +26,27 @@ const updateValues = (params: {
   selectedSearchType.value = params.searchType
   searchInput.value = params.searchInput
 }
+
+const updatePageNumber = (params: { pageNumber: number | null }) => {
+  currentPageNumber.value = params.pageNumber
+}
+
+const updateTotalPages = (params: { totalPages: number }) => {
+  currentTotalPages.value = params.totalPages
+}
 </script>
 
 <template>
-  <div class="mx-40 mt-15">
+  <div class="flex flex-col h-[calc(100vh-80px)] mx-40 pt-10">
     <SortAndSearch @sort="updateValues" @search="updateValues" />
     <Table
       :sortType="selectedSortType"
       :sortBy="selectedSortBy"
       :searchType="selectedSearchType"
       :searchInput="searchInput"
+      :currentPageNumber="currentPageNumber"
+      @totalPages="updateTotalPages"
     />
+    <PageControls :totalPages="currentTotalPages" @pageChanged="updatePageNumber" />
   </div>
 </template>

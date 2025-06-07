@@ -44,7 +44,7 @@ const deleteBook = async () => {
 </script>
 
 <template>
-  <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
+  <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1 max-h-[36px] h-[36px]">
     <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
       {{ book.title }}
     </div>
@@ -60,7 +60,7 @@ const deleteBook = async () => {
     <div class="font-primary font-medium text-center text-white px-3 py-1 text-xl">
       {{ book.read_status ? 'Finished' : 'Not finished' }}
     </div>
-    <div class="flex gap-1 mx-2">
+    <div class="flex gap-2 mx-2 py-0.5">
       <div
         class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
       >
