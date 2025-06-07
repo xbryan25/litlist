@@ -12,6 +12,8 @@ const selectedSortBy: Ref<string> = ref('Ascending')
 const selectedSearchType: Ref<string> = ref('All')
 const searchInput: Ref<string> = ref('')
 
+const currentPageNumber: Ref<number | null> = ref(1)
+
 const updateValues = (params: {
   sortType: string
   sortBy: string
@@ -23,6 +25,10 @@ const updateValues = (params: {
   selectedSearchType.value = params.searchType
   searchInput.value = params.searchInput
 }
+
+const updatePageNumber = (params: { pageNumber: number | null }) => {
+  currentPageNumber.value = params.pageNumber
+}
 </script>
 
 <template>
@@ -33,7 +39,8 @@ const updateValues = (params: {
       :sortBy="selectedSortBy"
       :searchType="selectedSearchType"
       :searchInput="searchInput"
+      :currentPageNumber="currentPageNumber"
     />
-    <PageControls />
+    <PageControls @pageChanged="updatePageNumber" />
   </div>
 </template>

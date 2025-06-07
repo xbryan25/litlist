@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref, type Ref, watch } from 'vue'
+import { ref, type Ref, watch, defineEmits } from 'vue'
 import debounce from 'lodash.debounce'
 
-const totalRows: number = 0
 const totalPages: number = 20
 const currentPageNumber: Ref<number | null> = ref(null)
+
+const emit = defineEmits<{
+  (e: 'pageChanged', payload: { pageNumber: number | null }): void
+}>()
 
 const goToNextPage = () => {
   if (!currentPageNumber.value) {
@@ -49,9 +52,17 @@ const goToSpecificPage = () => {
 }
 
 const emitPageNumber = debounce(() => {
-  // if currentPageNumber is 0, then emit 1
+  let tempPageNumber: number
 
-  console.log(currentPageNumber.value)
+  if (!currentPageNumber.value) {
+    tempPageNumber = 1
+  } else {
+    tempPageNumber = currentPageNumber.value
+  }
+
+  emit('pageChanged', {
+    pageNumber: tempPageNumber,
+  })
 }, 200)
 
 watch(currentPageNumber, () => {

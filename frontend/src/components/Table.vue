@@ -26,6 +26,7 @@ interface Props {
   sortBy?: string
   searchType?: string
   searchInput?: string
+  currentPageNumber: number | null
 }
 
 interface State {
@@ -65,13 +66,15 @@ async function updateVisibleRows(): Promise<void> {
 
     visibleRows.value = Math.floor(availableHeight / rowHeight)
 
-    state.visibleBooks = state.books.slice(0, visibleRows.value)
+    // state.visibleBooks = state.books.slice(0, visibleRows.value)
   } else {
     return
   }
 }
 
 const fetchData = async () => {
+  console.log(`Current page number: ${!props.currentPageNumber ? 'null' : props.currentPageNumber}`)
+
   try {
     const response = await axios.get('/api/books', {
       params: {
@@ -79,20 +82,28 @@ const fetchData = async () => {
         sort_by: props.sortBy,
         search_type: props.searchType,
         search_input: props.searchInput,
+        visible_rows: visibleRows.value,
+        current_page_number: props.currentPageNumber,
       },
     })
 
-    state.books = response.data.books
+    state.visibleBooks = response.data.books
   } catch (error) {
     console.error('Error fetching jobs', error)
   }
 }
 
 watch(
-  [() => props.sortType, () => props.sortBy, () => props.searchType, () => props.searchInput],
+  [
+    () => props.sortType,
+    () => props.sortBy,
+    () => props.searchType,
+    () => props.searchInput,
+    () => props.currentPageNumber,
+  ],
   async () => {
-    await fetchData()
     await updateVisibleRows()
+    await fetchData()
   },
 
   { immediate: true }, // Supplements onMounted

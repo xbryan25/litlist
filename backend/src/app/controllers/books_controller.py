@@ -5,7 +5,7 @@ import uuid
 from app.models import Book
 
 
-def fetch_all_books(db, sort_type, sort_by, search_type, search_input):
+def fetch_all_books(db, sort_type, sort_by, search_type, search_input, visible_rows, current_page_number):
     cursor = db.cursor()
 
     sort_by_dict = {"Ascending": "ASC", "Descending": "DESC"}
@@ -31,6 +31,12 @@ def fetch_all_books(db, sort_type, sort_by, search_type, search_input):
     else:
         sql += f""" ORDER BY {sort_type} {sort_by_dict[sort_by]}"""
 
+    sql += f""" LIMIT ? OFFSET ?"""
+
+    values += (visible_rows, (current_page_number - 1) * visible_rows)
+
+    print(sql)
+    print(values)
     cursor.execute(sql, values)
 
     rows = cursor.fetchall()
