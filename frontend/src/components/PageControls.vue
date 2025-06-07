@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { ref, type Ref, watch, defineEmits } from 'vue'
+import { ref, type Ref, watch, defineEmits, defineProps } from 'vue'
 import debounce from 'lodash.debounce'
 
-const totalPages: number = 20
+interface Props {
+  totalPages?: number
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  totalPages: 1,
+})
+
 const currentPageNumber: Ref<number | null> = ref(null)
 
 const emit = defineEmits<{
@@ -12,7 +19,7 @@ const emit = defineEmits<{
 const goToNextPage = () => {
   if (!currentPageNumber.value) {
     currentPageNumber.value = 2
-  } else if (currentPageNumber.value && currentPageNumber.value! <= totalPages) {
+  } else if (currentPageNumber.value && currentPageNumber.value! <= props.totalPages) {
     currentPageNumber.value!++
   }
 
@@ -36,7 +43,7 @@ const goToFirstPage = () => {
 }
 
 const goToLastPage = () => {
-  currentPageNumber.value = totalPages
+  currentPageNumber.value = props.totalPages
 
   emitPageNumber()
 }
@@ -44,8 +51,8 @@ const goToLastPage = () => {
 const goToSpecificPage = () => {
   if (currentPageNumber.value! < 1 && currentPageNumber.value) {
     currentPageNumber.value = 1
-  } else if (currentPageNumber.value! > totalPages) {
-    currentPageNumber.value = totalPages
+  } else if (currentPageNumber.value! > props.totalPages) {
+    currentPageNumber.value = props.totalPages
   }
 
   emitPageNumber()
@@ -101,7 +108,7 @@ watch(currentPageNumber, () => {
         <p
           class="font-primary text-white text-center w-full text-xl whitespace-nowrap overflow-x-auto"
         >
-          of {{ totalPages }}
+          of {{ props.totalPages }}
         </p>
       </div>
 

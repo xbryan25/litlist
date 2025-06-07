@@ -5,7 +5,7 @@ import uuid
 from app.models import Book
 
 
-def fetch_all_books(db, sort_type, sort_by, search_type, search_input, visible_rows, current_page_number):
+def fetch_books(db, sort_type, sort_by, search_type, search_input, visible_rows, current_page_number):
     cursor = db.cursor()
 
     sort_by_dict = {"Ascending": "ASC", "Descending": "DESC"}
@@ -35,8 +35,6 @@ def fetch_all_books(db, sort_type, sort_by, search_type, search_input, visible_r
 
     values += (visible_rows, (current_page_number - 1) * visible_rows)
 
-    print(sql)
-    print(values)
     cursor.execute(sql, values)
 
     rows = cursor.fetchall()
@@ -55,6 +53,32 @@ def fetch_book(db, book_id):
     row = cursor.fetchone()
 
     return Book.from_row(row)
+
+
+def get_total_pages(db, search_type, search_input, visible_rows):
+    cursor = db.cursor()
+
+    if search_type != "all":
+
+        sql = f"SELECT COUNT(*) FROM books WHERE {search_type} LIKE ?"
+
+        values = (f"%{search_input}%",)
+    else:
+        sql = f"""SELECT COUNT(*) FROM books 
+                       WHERE title LIKE ? OR 
+                       genre LIKE ? OR
+                       author LIKE ? OR
+                       pages LIKE ? OR
+                       read_status LIKE ?"""
+
+        values = (f"%{search_input}%", f"%{search_input}%", f"%{search_input}%", f"%{search_input}%",
+                  f"%{search_input}%")
+
+    cursor.execute(sql, values)
+
+    total_rows = cursor.fetchone()[0]
+
+    return ((total_rows - 1) // visible_rows) + 1
 
 
 def add_book(db, book):

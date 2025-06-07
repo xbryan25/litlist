@@ -12,6 +12,7 @@ const selectedSortBy: Ref<string> = ref('Ascending')
 const selectedSearchType: Ref<string> = ref('All')
 const searchInput: Ref<string> = ref('')
 
+const currentTotalPages: Ref<number> = ref(1)
 const currentPageNumber: Ref<number | null> = ref(1)
 
 const updateValues = (params: {
@@ -29,6 +30,10 @@ const updateValues = (params: {
 const updatePageNumber = (params: { pageNumber: number | null }) => {
   currentPageNumber.value = params.pageNumber
 }
+
+const updateTotalPages = (params: { totalPages: number }) => {
+  currentTotalPages.value = params.totalPages
+}
 </script>
 
 <template>
@@ -40,7 +45,8 @@ const updatePageNumber = (params: { pageNumber: number | null }) => {
       :searchType="selectedSearchType"
       :searchInput="searchInput"
       :currentPageNumber="currentPageNumber"
+      @totalPages="updateTotalPages"
     />
-    <PageControls @pageChanged="updatePageNumber" />
+    <PageControls :totalPages="currentTotalPages" @pageChanged="updatePageNumber" />
   </div>
 </template>

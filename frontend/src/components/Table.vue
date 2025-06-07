@@ -3,6 +3,7 @@ import {
   onMounted,
   reactive,
   defineProps,
+  defineEmits,
   watch,
   type Ref,
   ref,
@@ -51,8 +52,13 @@ const handleDelete = (id: string) => {
 // rowHeight = tableRow + tableRow.marginTop + tableRow.marginBottom
 const rowHeight: number = 36 + 4 + 4
 const visibleRows: Ref<number> = ref(0)
+let totalPages: number = 1
 
 const tableRef: Ref<HTMLElement | null> = ref<HTMLElement | null>(null)
+
+const emit = defineEmits<{
+  (e: 'totalPages', payload: { totalPages: number }): void
+}>()
 
 async function updateVisibleRows(): Promise<void> {
   await nextTick()
@@ -66,6 +72,8 @@ async function updateVisibleRows(): Promise<void> {
 
     visibleRows.value = Math.floor(availableHeight / rowHeight)
 
+    console.log(`visibleRows: ${visibleRows.value}`)
+
     // state.visibleBooks = state.books.slice(0, visibleRows.value)
   } else {
     return
@@ -73,8 +81,6 @@ async function updateVisibleRows(): Promise<void> {
 }
 
 const fetchData = async () => {
-  console.log(`Current page number: ${!props.currentPageNumber ? 'null' : props.currentPageNumber}`)
-
   try {
     const response = await axios.get('/api/books', {
       params: {
@@ -87,9 +93,33 @@ const fetchData = async () => {
       },
     })
 
-    state.visibleBooks = response.data.books
+    state.books = response.data.books
   } catch (error) {
     console.error('Error fetching jobs', error)
+  }
+}
+
+const sendTotalPages = async () => {
+  await fetchTotalPages()
+
+  emit('totalPages', {
+    totalPages: totalPages,
+  })
+}
+
+const fetchTotalPages = async () => {
+  try {
+    const response = await axios.get('/api/books/total-pages', {
+      params: {
+        search_type: props.searchType,
+        search_input: props.searchInput,
+        visible_rows: visibleRows.value,
+      },
+    })
+
+    totalPages = response.data.total_pages
+  } catch (error) {
+    console.error('Error fetching total pages', error)
   }
 }
 
@@ -104,10 +134,17 @@ watch(
   async () => {
     await updateVisibleRows()
     await fetchData()
+    await sendTotalPages()
   },
 
   { immediate: true }, // Supplements onMounted
 )
+
+watch(visibleRows, async () => {
+  console.log('fetch data')
+  await fetchData()
+  await sendTotalPages()
+})
 
 onMounted(async () => {
   window.addEventListener('resize', updateVisibleRows)
@@ -135,7 +172,7 @@ onBeforeUnmount(() => {
     <hr class="border-t border-[#868484]" />
 
     <TableRow
-      v-for="book in state.visibleBooks.slice(0, state.visibleBooks.length)"
+      v-for="book in state.books.slice(0, state.books.length)"
       :key="book.id"
       :book="book"
       @deleted="handleDelete"
