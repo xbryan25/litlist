@@ -82,7 +82,7 @@ watch(currentPageNumber, () => {
     <div class="flex h-8 gap-2 max-w-full">
       <button
         @click="goToFirstPage"
-        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e] inline-flex items-center justify-center"
+        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e] inline-flex items-center justify-center"
       >
         <img
           src="@/assets/images/first-page-light-mode.svg"
@@ -97,7 +97,7 @@ watch(currentPageNumber, () => {
       </button>
       <button
         @click="goToPreviousPage"
-        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e] inline-flex items-center justify-center"
+        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e] inline-flex items-center justify-center"
       >
         <img
           src="@/assets/images/prev-page-light-mode.svg"
@@ -119,7 +119,7 @@ watch(currentPageNumber, () => {
         id="number"
         name="number"
         :placeholder="`${currentPageNumber ? String(currentPageNumber) : '1'}`"
-        class="flex-1 font-primary w-15 border rounded text-black dark:text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none dark:hover:bg-[#2e2e2e] ml-3 text-xl pl-1 pr-1"
+        class="flex-1 font-primary w-15 border border-[#868484] rounded text-black dark:text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e] ml-3 text-xl pl-1 pr-1"
       />
 
       <div class="flex flex-1 items-center mr-3 w-full">
@@ -132,7 +132,7 @@ watch(currentPageNumber, () => {
 
       <button
         @click="goToNextPage"
-        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e] inline-flex items-center justify-center"
+        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e] inline-flex items-center justify-center"
       >
         <img
           src="@/assets/images/next-page-light-mode.svg"
@@ -147,7 +147,7 @@ watch(currentPageNumber, () => {
       </button>
       <button
         @click="goToLastPage"
-        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e] inline-flex items-center justify-center"
+        class="dark:bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e] inline-flex items-center justify-center"
       >
         <img
           src="@/assets/images/last-page-light-mode.svg"

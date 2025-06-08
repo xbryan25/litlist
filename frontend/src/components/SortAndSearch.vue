@@ -56,7 +56,7 @@ watch(searchInput, () => {
       <select
         v-model="selectedSortType"
         @change="handleSortChange"
-        class="font-primary text-xl font-bold dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="Title">Title</option>
         <option value="Genre">Genre</option>
@@ -68,7 +68,7 @@ watch(searchInput, () => {
       <select
         v-model="selectedSortBy"
         @change="handleSortChange"
-        class="font-primary text-xl font-bold dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="Ascending">Ascending</option>
         <option value="Descending">Descending</option>
@@ -86,7 +86,7 @@ watch(searchInput, () => {
 
       <select
         v-model="selectedSearchType"
-        class="font-primary text-xl font-bold dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="All">All</option>
         <option value="Title">Title</option>
@@ -101,7 +101,7 @@ watch(searchInput, () => {
         @change="handleSearchChange"
         type="search"
         placeholder="Search..."
-        class="font-primary text-xl font-bold dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] rounded border border-gray-300 min-w-0 pl-1.5"
+        class="font-primary text-xl font-bold hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] rounded border border-[#868484] min-w-0 pl-1.5"
       />
     </div>
   </div>

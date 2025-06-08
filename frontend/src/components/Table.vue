@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="tableRef"
-    class="dark:bg-[#434343] min-h-[60vh] rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)] overflow-y-hidden h-full"
+    class="bg-[#f2f2f2] dark:bg-[#434343] min-h-[60vh] rounded-xl border border-[#868484] shadow-[10px_10px_4px_rgba(0,0,0,0.375)] overflow-y-hidden h-full"
   >
     <div class="grid grid-cols-[1fr_1fr_1fr_1fr_1fr_100px] mt-1 mb-1">
       <div class="font-primary text-center dark:text-white px-3 py-1 font-bold text-xl">Title</div>

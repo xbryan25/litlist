@@ -106,7 +106,7 @@ onMounted(async () => {
             type="text"
             id="title"
             name="title"
-            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black dark:text-[#D9D9D9] hover:bg-[#2e2e2e]"
+            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black hover:bg-[#cccccc] dark:text-[#D9D9D9] dark:hover:bg-[#2e2e2e]"
             placeholder="Title"
             required
           />
@@ -121,7 +121,7 @@ onMounted(async () => {
             type="text"
             id="genre"
             name="genre"
-            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black dark:text-[#D9D9D9] hover:bg-[#2e2e2e]"
+            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black hover:bg-[#cccccc] dark:text-[#D9D9D9] dark:hover:bg-[#2e2e2e]"
             placeholder="Genre"
             required
           />
@@ -136,7 +136,7 @@ onMounted(async () => {
             type="text"
             id="author"
             name="author"
-            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black dark:text-[#D9D9D9] hover:bg-[#2e2e2e]"
+            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black hover:bg-[#cccccc] dark:text-[#D9D9D9] dark:hover:bg-[#2e2e2e]"
             placeholder="Author"
             required
           />
@@ -153,7 +153,7 @@ onMounted(async () => {
             max="9999999"
             id="number"
             name="number"
-            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black dark:text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none hover:bg-[#2e2e2e]"
+            class="font-primary border rounded w-full py-2 px-3 mb-2 text-black dark:text-[#D9D9D9] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e]"
             placeholder="Number of pages"
             required
           />
@@ -193,7 +193,7 @@ onMounted(async () => {
 
         <div class="mx-10 mt-10">
           <button
-            class="font-primary container w-full cursor-pointer text-center py-1 rounded-lg text-2xl font-bold border border-[#868484] dark:bg-[#363636] dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e]"
+            class="font-primary container w-full cursor-pointer text-center py-1 rounded-lg text-2xl font-bold border border-[#868484] hover:bg-[#cccccc] dark:bg-[#363636] dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e]"
             type="submit"
           >
             {{ formType === 'add-book' ? 'Add Book' : 'Edit Book' }}

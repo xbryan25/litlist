@@ -60,7 +60,7 @@ const deleteBook = async () => {
     </div>
     <div class="flex gap-2 mx-2 py-0.5">
       <div
-        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
+        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e]"
       >
         <RouterLink :to="`/edit-book/${props.book.id}`">
           <img
@@ -77,7 +77,7 @@ const deleteBook = async () => {
       </div>
       <div
         @click="deleteBook"
-        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#2e2e2e]"
+        class="flex flex-1 rounded-lg border border-[#868484] justify-center items-center cursor-pointer hover:bg-[#cccccc] dark:hover:bg-[#2e2e2e]"
       >
         <img
           src="@/assets/images/delete-dark-mode.svg"

@@ -22,7 +22,7 @@ function changeThemeImage() {
 </script>
 
 <template>
-  <nav class="bg-yellow-50 dark:bg-[#434343] shadow-[0px_6px_4px_rgba(0,0,0,0.375)]">
+  <nav class="bg-[#f2f2f2] dark:bg-[#434343] shadow-[0px_6px_4px_rgba(0,0,0,0.375)]">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-20 items-center justify-between">
         <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
@@ -37,12 +37,12 @@ function changeThemeImage() {
             <div class="flex space-x-2">
               <RouterLink
                 to="/"
-                class="font-primary text-black hover:bg-green-500 hover:text-black dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] dark:hover:text-white rounded-md px-3 py-1 font-bold text-2xl"
+                class="font-primary text-black hover:bg-[#cccccc] hover:text-black dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] dark:hover:text-white rounded-md px-3 py-1 font-bold text-2xl"
                 >View Books</RouterLink
               >
               <RouterLink
                 to="/add-book"
-                class="font-primary text-black hover:bg-green-500 hover:text-black dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] dark:hover:text-white rounded-md px-3 py-1 font-bold text-2xl"
+                class="font-primary text-black hover:bg-[#cccccc] hover:text-black dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] dark:hover:text-white rounded-md px-3 py-1 font-bold text-2xl"
                 >Add Book</RouterLink
               >
               <div
