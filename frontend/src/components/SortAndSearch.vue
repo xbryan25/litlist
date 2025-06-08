@@ -46,7 +46,9 @@ watch(searchInput, () => {
   <div class="flex min-h-10 h-10 my-5 gap-60">
     <div class="flex-1 grid grid-cols-[95px_1fr_1fr] gap-4 min-w-0">
       <div class="flex items-center justify-center min-w-0">
-        <p class="font-primary flex-1 text-xl font-bold text-[#F2EFEF] text-left min-w-0">
+        <p
+          class="font-primary flex-1 text-xl font-bold text-black dark:text-[#F2EFEF] text-left min-w-0"
+        >
           Sort By
         </p>
       </div>
@@ -54,7 +56,7 @@ watch(searchInput, () => {
       <select
         v-model="selectedSortType"
         @change="handleSortChange"
-        class="font-primary text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="Title">Title</option>
         <option value="Genre">Genre</option>
@@ -66,7 +68,7 @@ watch(searchInput, () => {
       <select
         v-model="selectedSortBy"
         @change="handleSortChange"
-        class="font-primary text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="Ascending">Ascending</option>
         <option value="Descending">Descending</option>
@@ -75,14 +77,16 @@ watch(searchInput, () => {
 
     <div class="flex-1 grid grid-cols-[95px_1fr_1fr] gap-4 min-w-0">
       <div class="flex items-center justify-center min-w-0">
-        <p class="font-primary flex-1 text-xl font-bold text-[#F2EFEF] text-left min-w-0">
+        <p
+          class="font-primary flex-1 text-xl font-bold text-black dark:text-[#F2EFEF] text-left min-w-0"
+        >
           Search By
         </p>
       </div>
 
       <select
         v-model="selectedSearchType"
-        class="font-primary text-xl font-bold text-[#F2EFEF] bg-[#434343] border border-[#868484] rounded-sm min-w-0 cursor-pointer hover:bg-[#2e2e2e]"
+        class="font-primary text-xl font-bold text-black bg-[#e6e6e6] hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:bg-[#434343] dark:hover:bg-[#2e2e2e] border border-[#868484] rounded-sm min-w-0 cursor-pointer"
       >
         <option value="All">All</option>
         <option value="Title">Title</option>
@@ -97,7 +101,7 @@ watch(searchInput, () => {
         @change="handleSearchChange"
         type="search"
         placeholder="Search..."
-        class="font-primary text-xl font-bold text-[#F2EFEF] rounded border border-gray-300 min-w-0 pl-1.5 hover:bg-[#2e2e2e]"
+        class="font-primary text-xl font-bold hover:bg-[#cccccc] dark:text-[#F2EFEF] dark:hover:bg-[#2e2e2e] rounded border border-[#868484] min-w-0 pl-1.5"
       />
     </div>
   </div>
