@@ -28,7 +28,6 @@ def get_books_func():
     if search_type not in ['all', 'title', 'genre', 'author', 'pages', 'read_status']:
         return jsonify({"message": "Invalid search type option"}), 400
 
-    print(f"visible rows {visible_rows}")
     try:
         db = get_db()
         books = fetch_books(db=db, sort_type=sort_type, sort_by=sort_by, search_type=search_type,

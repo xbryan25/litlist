@@ -78,7 +78,7 @@ def get_total_pages(db, search_type, search_input, visible_rows):
 
     total_rows = cursor.fetchone()[0]
 
-    return ((total_rows - 1) // visible_rows) + 1
+    return ((total_rows - 1) // visible_rows) + 1 if total_rows != 0 else 1
 
 
 def add_book(db, book):

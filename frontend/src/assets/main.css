@@ -5,6 +5,8 @@
   --font-primary: "Urbanist", "sans-serif";
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: 'Urbanist';
   src: url('/fonts/Urbanist.ttf') format('truetype');
@@ -12,8 +14,4 @@
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
-}
-
-body {
-  background-color: #313131;
 }
