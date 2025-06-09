@@ -1,10 +1,11 @@
 {
-  "name": "frontend",
-  "version": "0.0.0",
+  "name": "litlist",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
