@@ -22,13 +22,14 @@ const props = defineProps<Props>()
 
 const toast = useToast()
 const emit = defineEmits(['deleted'])
+const apiUrl = import.meta.env.VITE_API_URL
 
 const deleteBook = async () => {
   try {
     const confirm = window.confirm('Are you sure you want to delete this book?')
 
     if (confirm) {
-      await axios.delete(`/api/books/book/${props.book.id}`)
+      await axios.delete(`${apiUrl}/books/book/${props.book.id}`)
 
       toast.success('Book deleted successfully')
 
