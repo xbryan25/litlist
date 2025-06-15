@@ -2,8 +2,6 @@
 import { defineProps, defineEmits, ref, computed, type Ref } from 'vue'
 import axios from 'axios'
 import { useToast } from 'vue-toastification'
-// import delete_icon from '@/assets/images/delete.svg'
-// import edit_icon from '@/assets/images/edit.svg'
 
 interface Book {
   id: string
@@ -22,13 +20,14 @@ const props = defineProps<Props>()
 
 const toast = useToast()
 const emit = defineEmits(['deleted'])
+const API_URL = import.meta.env.VITE_API_URL
 
 const deleteBook = async () => {
   try {
     const confirm = window.confirm('Are you sure you want to delete this book?')
 
     if (confirm) {
-      await axios.delete(`/api/books/book/${props.book.id}`)
+      await axios.delete(`${API_URL}/books/book/${props.book.id}`)
 
       toast.success('Book deleted successfully')
 
