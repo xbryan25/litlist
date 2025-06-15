@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Form from '@/components/Form.vue'
+import BookForm from '@/components/BookForm.vue'
 </script>
 
 <template>
-  <Form formType="edit-book" />
+  <BookForm formType="edit-book" />
 </template>

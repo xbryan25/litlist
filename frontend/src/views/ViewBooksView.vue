@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
-import Table from '@/components/Table.vue'
+import ContentTable from '@/components/ContentTable.vue'
 import SortAndSearch from '@/components/SortAndSearch.vue'
 import PageControls from '@/components/PageControls.vue'
 
@@ -37,7 +37,7 @@ const updateTotalPages = (params: { totalPages: number }) => {
 <template>
   <div class="flex flex-col h-[calc(100vh-80px)] mx-40 pt-10">
     <SortAndSearch @sort="updateValues" @search="updateValues" />
-    <Table
+    <ContentTable
       :sortType="selectedSortType"
       :sortBy="selectedSortBy"
       :searchType="selectedSearchType"
