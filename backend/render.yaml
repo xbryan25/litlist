@@ -3,14 +3,10 @@ services:
     name: litlist-backend
     runtime: python
     plan: free
-    buildCommand: ""
-    startCommand: gunicorn -w 1 -b 0.0.0.0:8080 src.run:app
+    buildCommand: pip install -r ../requirements.txt
+    startCommand: gunicorn -w 1 -b 0.0.0.0:8080 run:app
     envVars:
-      - key: DATABASE_URL
-        value: sqlite:///src/app/db/books.db
       - key: PYTHONPATH
-        value: src
+        value: .
+    rootDir: backend/src
     autoDeploy: true
-    buildFilter:
-      paths:
-        - backend/**
