@@ -71,7 +71,7 @@ const handleSubmit = async () => {
 onMounted(async () => {
   if (props.formType === 'edit-book') {
     try {
-      const response = await axios.get(`/api/books/book/${bookId}`)
+      const response = await axios.get(`${apiUrl}/books/book/${bookId}`)
 
       form.title = response.data.books.title
       form.genre = response.data.books.genre
