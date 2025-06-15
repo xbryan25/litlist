@@ -1,3 +1,8 @@
+import os
+import sys
+print("CWD:", os.getcwd())
+print("sys.path:", sys.path)
+
 from app import create_app
 
 app = create_app()
