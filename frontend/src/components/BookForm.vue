@@ -48,11 +48,11 @@ const handleSubmit = async () => {
 
   try {
     if (props.formType === 'add-book') {
-      const response = await axios.post(`${API_URL}/books/add-book`, newBook)
+      await axios.post(`${API_URL}/books/add-book`, newBook)
 
       toast.success('Book added successfully')
     } else if (props.formType === 'edit-book') {
-      const response = await axios.put(`${API_URL}/books/book/${bookId}`, newBook)
+      await axios.put(`${API_URL}/books/book/${bookId}`, newBook)
       toast.success('Book edited successfully')
     }
 
