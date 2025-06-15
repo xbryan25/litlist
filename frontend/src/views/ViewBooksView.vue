@@ -3,8 +3,6 @@ import { ref, type Ref } from 'vue'
 import Table from '@/components/Table.vue'
 import SortAndSearch from '@/components/SortAndSearch.vue'
 import PageControls from '@/components/PageControls.vue'
-import { getEffectiveTypeParameterDeclarations } from 'typescript'
-// import NavBar from '@/components/NavBar.vue'
 
 const selectedSortType: Ref<string> = ref('Title')
 const selectedSortBy: Ref<string> = ref('Ascending')

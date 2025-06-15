@@ -52,6 +52,7 @@ const handleDelete = (id: string) => {
 // rowHeight = tableRow + tableRow.marginTop + tableRow.marginBottom
 const rowHeight: number = 36 + 4 + 4
 const visibleRows: Ref<number> = ref(0)
+const API_URL = import.meta.env.VITE_API_URL
 let totalPages: number = 1
 
 const tableRef: Ref<HTMLElement | null> = ref<HTMLElement | null>(null)
@@ -82,7 +83,7 @@ async function updateVisibleRows(): Promise<void> {
 
 const fetchData = async () => {
   try {
-    const response = await axios.get('/api/books', {
+    const response = await axios.get(`${API_URL}/books`, {
       params: {
         sort_type: props.sortType,
         sort_by: props.sortBy,
@@ -109,7 +110,7 @@ const sendTotalPages = async () => {
 
 const fetchTotalPages = async () => {
   try {
-    const response = await axios.get('/api/books/total-pages', {
+    const response = await axios.get(`${API_URL}/books/total-pages`, {
       params: {
         search_type: props.searchType,
         search_input: props.searchInput,

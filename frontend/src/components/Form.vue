@@ -23,6 +23,7 @@ const route = useRoute()
 const router = useRouter()
 const toast = useToast()
 const bookId = route.params.id
+const API_URL = import.meta.env.VITE_API_URL
 
 const props = withDefaults(defineProps<Props>(), {
   formType: 'add-book',
@@ -47,11 +48,11 @@ const handleSubmit = async () => {
 
   try {
     if (props.formType === 'add-book') {
-      const response = await axios.post(`/api/books/add-book`, newBook)
+      const response = await axios.post(`${API_URL}/books/add-book`, newBook)
 
       toast.success('Book added successfully')
     } else if (props.formType === 'edit-book') {
-      const response = await axios.put(`/api/books/book/${bookId}`, newBook)
+      const response = await axios.put(`${API_URL}/books/book/${bookId}`, newBook)
       toast.success('Book edited successfully')
     }
 
@@ -70,7 +71,7 @@ const handleSubmit = async () => {
 onMounted(async () => {
   if (props.formType === 'edit-book') {
     try {
-      const response = await axios.get(`/api/books/book/${bookId}`)
+      const response = await axios.get(`${API_URL}/books/book/${bookId}`)
 
       form.title = response.data.books.title
       form.genre = response.data.books.genre
