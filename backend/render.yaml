@@ -8,6 +8,8 @@ services:
     envVars:
       - key: DATABASE_URL
         value: sqlite:///src/app/db/books.db
+      - key: PYTHONPATH
+        value: src
     autoDeploy: true
     buildFilter:
       paths:
